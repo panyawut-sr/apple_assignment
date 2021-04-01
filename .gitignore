@@ -2,6 +2,7 @@
 train.txt
 test.txt
 evaluate.txt
+results.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
