@@ -8,7 +8,7 @@ The program contains the two main systems.
 
    - Tokenization using the tokenizer from PyThaiNLP (an efficient tool for Thai language)
    - Fix mispelled words based on my own dictionary
-   - Normalize integer text to thai text
+   - Normalize integer text to Thai text
    - Use tf-idf as the feature
    - Use Multinomial Naive Bayes as the model
 
@@ -17,11 +17,11 @@ The program contains the two main systems.
    - Use a rule-based algorithm to extract the time intent (based on common Thai grammar knowledge)
    - Handle cases where the user's intent does not match the algorithm's assumptions
 
-This system supports the Thai hour unit of "โมง", "นาฬิกา", "ทุ่ม", "ยาม", and "บ่าย", including the minute units such as "นาที", "ครึ่ง", "ตรง". I also provide <config.py> for adjusting the parameters.
+This program supports the Thai hour unit of "โมง", "นาฬิกา", "ทุ่ม", "ยาม", and "บ่าย", including the minute units such as "นาที", "ครึ่ง", "ตรง". I also provide <config.py> for adjusting the parameters.
 
 ## Current accuracy
 
-I split 10% of the data from "th_dataset.txt" as the validation set, and the remaining 90% of the data as the training set.
+I randomly split 10% of the data from "th_dataset.txt" as the validation set, and the remaining 90% of the data as the training set.
 
 The current accuracy is as follows:
 
