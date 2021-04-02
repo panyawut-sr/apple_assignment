@@ -17,7 +17,7 @@ The program contains the two main systems.
    - Use a rule-based algorithm to extract the time intent (based on common Thai grammar knowledge)
    - Handle cases where the user's intent does not match the algorithm's assumptions
 
-This system supports the Thai hour unit of "โมง", "นาฬิกา", "ทุ่ม", "ยาม", and "บ่าย", including the minute units such as "นาที", "ครึ่ง", "ตรง". I also provide <config.py> for adjusting the parameters/
+This system supports the Thai hour unit of "โมง", "นาฬิกา", "ทุ่ม", "ยาม", and "บ่าย", including the minute units such as "นาที", "ครึ่ง", "ตรง". I also provide <config.py> for adjusting the parameters.
 
 ## Current accuracy
 
