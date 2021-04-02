@@ -65,6 +65,7 @@ There are 4 modes for this program.
    - The input is named <sentence>, which is typed in the command line.
    - The program will print the output of classification and user's intent based on the <sentence> (in the command line).
    - Example: "python main.py --mode=TestSample --sentence=<sentence>"
+   - Note that this function required the input without spacing
 
 4. TestFile
    - This mode is used for testing a set of sentences.

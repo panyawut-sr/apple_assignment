@@ -43,16 +43,8 @@ class PostProcessingText():
           newTime = self.handle_simple_time(user_time)
     return oldTime, newTime
 
-  def handle_classification_result(self, text, request_func):
-    if(("ลบ" in text) and ("ไม่ลบ" not in text)):
-      return "deleteAlarm"
-    elif(("ปลุก" in text) and ("ไม่" not in text)):
-      return "createAlarm" 
-    return request_func
-
   def post_processing_user_intent(self, tokenized_text=None, user_intent=None, request_func=None):
     text = "".join(tokenized_text)
-    request_func = self.handle_classification_result(text, request_func)
     ans = {"requestFunc": request_func}
     user_label, user_device, user_times = user_intent
     if(request_func == "createAlarm"):
