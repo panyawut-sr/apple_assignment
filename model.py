@@ -14,9 +14,11 @@ class NLUModel:
   def train(self, X, y, filename="model.sav"):
     self.nb.fit(X, y)
     pickle.dump(self.nb, open(filename, 'wb'))
+    print("Save the model at: "+filename)
   
   def load_model(self, filename="model.sav"):
     self.nb = pickle.load(open(filename, 'rb'))
+    print("Load the model at: "+filename)
 
   def test(self, X):
     return self.nb.predict(X)  

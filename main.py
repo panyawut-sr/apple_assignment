@@ -10,15 +10,19 @@ import pandas as pd
 def run(config):
     
     if(config.mode == "Train"):
+      print("Load training data")
       df = pd.read_csv(config.train_data, delimiter="\t", header=None)
       df.columns = ["text", "label"]
 
+      print("Preprocessing")
       pre = PreProcessingText()
       custom_dictionary = pre.create_dict()
       
       df_train, vocab_to_idx, idx_to_vocab, cnt_vocab, maxlen = pre.make_vocab_and_tokenize(df, custom_dictionary)
       model = NLUModel(config.alpha, config.fit_prior)
+      print("Training")
       model.train(df_train["text"], df_train["label"], config.save_model_path)
+      print("Finish")
     
     elif(config.mode == "Evaluate"):
       pre = PreProcessingText()
@@ -26,14 +30,19 @@ def run(config):
       intent = UserIntent(label_regex_list, device_list, time_regex_list)
       post = PostProcessingText()
 
+      print("Load evaluation data")
       df_test = pd.read_csv(config.evaluate_data, delimiter="\t", header=None)
       df_test.columns = ["text", "label"]
+
+      print("Preprocessing")
       df_test = pre.preprocess_test(df_test, custom_dictionary)
 
       model = NLUModel(config.alpha, config.fit_prior)
+      print("Evaluating the model")
       model.load_model(config.load_trained_model_path)
       predict = model.test(df_test["text"])
       model.evaluate(df_test["label"].values, predict)
+      print("Finish")
 
     elif(config.mode == "TestSample"):
       t = config.sentence
@@ -46,7 +55,7 @@ def run(config):
       model = NLUModel(config.alpha, config.fit_prior)
       model.load_model(config.load_trained_model_path)
       predict = model.test([t])
-      user_intent = intent.find_user_intent([t])
+      user_intent = intent.find_user_intent(t.split())
       ans = post.post_processing_user_intent([t], user_intent, predict[0])
       print("".join(t.split()))
       print(str(ans))
@@ -65,7 +74,7 @@ def run(config):
       model.load_model(config.load_trained_model_path)
       predict = model.test(df_test["text"])
       
-      with open("results.txt", "w") as f:
+      with open(config.result_path, "w") as f:
         for i in range(len(df_test)):
           t = df_test["text"].iloc[i].split()
           user_intent = intent.find_user_intent(t)

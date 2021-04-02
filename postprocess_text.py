@@ -5,12 +5,13 @@ class PostProcessingText():
     self.wake_keyword = ["เตือน", "เรียก", "ปลุก", ]
     self.middle_keywords = ["ไป", "เป็น", "แล้ว"]
 
-  def handle_simple_time(self, time_text):
+  def handle_simple_time(self, time_text): 
     if((time_text[1] == None) or (time_text[1] == "0")):
       return time_text[0]
     else:
       return time_text[0]+"."+time_text[1]
 
+  # Use when we have the unmatch intents
   def handle_complex_time(self, text, user_times):
     wake_position = None
     time = None
@@ -42,8 +43,16 @@ class PostProcessingText():
           newTime = self.handle_simple_time(user_time)
     return oldTime, newTime
 
+  def handle_classification_result(self, text, request_func):
+    if(("ลบ" in text) and ("ไม่ลบ" not in text)):
+      return "deleteAlarm"
+    elif(("ปลุก" in text) and ("ไม่" not in text)):
+      return "createAlarm" 
+    return request_func
+
   def post_processing_user_intent(self, tokenized_text=None, user_intent=None, request_func=None):
     text = "".join(tokenized_text)
+    request_func = self.handle_classification_result(text, request_func)
     ans = {"requestFunc": request_func}
     user_label, user_device, user_times = user_intent
     if(request_func == "createAlarm"):

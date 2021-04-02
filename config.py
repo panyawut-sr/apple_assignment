@@ -36,7 +36,9 @@ misc_arg = add_argument_group('Misc.')
 misc_arg.add_argument('--load_trained_model_path', type=str, default='model.sav',
                       help='Directory for loading model')
 misc_arg.add_argument('--save_model_path', type=str, default='model.sav',
-                      help='Directory for saving model')
+                      help='Directory for saving the model')
+misc_arg.add_argument('--result_path', type=str, default='results.txt',
+                      help='Directory for saving the restuls')
                       
 
 def get_config():
